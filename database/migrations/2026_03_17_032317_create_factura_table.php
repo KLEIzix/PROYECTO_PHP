@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamps();
 
 
-            $table->foreign('Id_order')->references('id')->on('pedido')->onDelete('cascade');
+            $table->foreign('Id_order')->references('id')->on('order')->onDelete('cascade');
             $table->foreign('Id_cajero')->references('id')->on('users')->onDelete('cascade');
         });
     }

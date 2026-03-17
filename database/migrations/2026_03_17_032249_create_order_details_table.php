@@ -11,16 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pedido_detalles', function (Blueprint $table) {
+        Schema::create('order_details', function (Blueprint $table) {
             $table->id();
-            $table->decimal('price_unitario', 10, 2);
-            $table->amount('cantidad');
+
             $table->unsignedBigInteger('Id_order');
             $table->unsignedBigInteger('Id_producto');
+
+            $table->decimal('unit_price', 10, 2);
+            $table->integer('cantidad');
+            $table->decimal('subtotal', 10, 2)->storedAs('cantidad * unit_price');
             $table->timestamps();
 
 
-            $table->foreign('Id_order')->references('id')->on('pedido')->onDelete('cascade');
+            $table->foreign('Id_order')->references('id')->on('order')->onDelete('cascade');
             $table->foreign('Id_producto')->references('id')->on('producto')->onDelete('cascade');
         });
     }
